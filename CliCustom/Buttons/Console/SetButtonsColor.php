@@ -4,19 +4,34 @@ namespace CliCustom\Buttons\Console;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 class SetButtonsColor extends Command
 {
+	const COR = 'cor';
+
 	protected function configure()
 	{
-		$this->setName('custombtn:set_color');
-		$this->setDescription('muda cor dos btns');
+		$options = [
+			new InputOption(
+				self::COR,
+				null,
+				InputOption::VALUE_REQUIRED,
+				'Cor'
+			)
+		];
 
-		parent::configure();
+		$this->setName('custombtn:set_color')
+			 ->setDescription('muda cor dos btns')
+			 ->setDefinition($options);
+
+		 parent::configure();
 	}
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$output->writeln("muda cor dos btns");
+		$cor = $input->getOption(self::COR);
+		$output->writeln("muda cor dos btns para: #{$cor}");
+		return $this;
 	}
 
 }

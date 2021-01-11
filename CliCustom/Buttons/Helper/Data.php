@@ -2,13 +2,25 @@
 
 namespace CliCustom\Buttons\Helper;
 
+use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\App\Helper\Context;
 
 class Data extends AbstractHelper
 {
 
 	const XML_PATH_COLOR = 'buttons/';
+	protected $configWriter;
+
+	public function __construct(
+		Context $context,
+		WriterInterface $configWriter
+	)
+	{
+		parent::__construct($context);
+		$this->configWriter = $configWriter;
+	}
 
 	public function getConfigValue($field, $storeId = null)
 	{
@@ -21,11 +33,12 @@ class Data extends AbstractHelper
 	{
 		return $this->getConfigValue(self::XML_PATH_COLOR .'general/'. $code, $storeId);
 	}
-	
 
-	public function setGeneralConfig($code, $storeId = null)
+	public function setGeneralConfig($code, $value)
 	{
-		return $this->setConfigValue(self::XML_PATH_COLOR .'general/'. $code, $storeId);
+		var_dump('arro');
+		$this->configWriter
+			 ->save(self::XML_PATH_COLOR .'general/'. $code,  $value, 'default', $scopeId = 0);
 	}
 
 }

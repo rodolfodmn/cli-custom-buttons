@@ -19,6 +19,7 @@ class SetButtonsColor extends Command
 			$this->helperData = $helperData;
 			parent::__construct();
 		}
+
 		protected function configure()
 		{
 			$options = [
@@ -41,7 +42,9 @@ class SetButtonsColor extends Command
 			$cor = $input->getOption(self::COR);
 
 			$corOld = $this->helperData->getGeneralConfig('custom_color');
-			$output->writeln("muda cor dos btns de {$corOld} para: #{$cor}");
+
+			$this->helperData->setGeneralConfig('custom_color', $cor);
+			$output->writeln("muda cor dos btns de {$corOld} para: {$cor}");
 			return $this;
 		}
 

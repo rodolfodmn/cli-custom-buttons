@@ -3,8 +3,19 @@ namespace CliCustom\Buttons\Block;
 
 class CustomColor extends \Magento\Framework\View\Element\Template
 {
-    public function getTitle()
+
+    protected $helperData;
+    public function __construct(
+        \CliCustom\Buttons\Helper\Data $helperData,
+        \Magento\Framework\View\Element\Template\Context $context
+    )
     {
-        return "Custom Color";
+        $this->helperData = $helperData;
+        parent::__construct($context);
+    }
+
+    public function getCustomColor()
+    {
+        return $this->helperData->getGeneralConfig('custom_color');
     }
 }

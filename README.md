@@ -1,5 +1,5 @@
 # cli-custom-buttons
-módulo para alterar a cordos botões no magento 2
+módulo para alterar dinamicamente a cor dos botões de toda a loja no magento 2
 
 ## Instalação 
 cd <caminha_para_pasta_do_magento_2>/app/code/ <br/>
